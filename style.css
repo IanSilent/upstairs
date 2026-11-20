@@ -1,0 +1,47 @@
+/* Canvas is 960x540 logical pixels, scaled to fit the window by main.js (it also sets the stage
+   font-size, so overlays sized in em scale with it). */
+html, body { margin: 0; height: 100%; background: #050506; overflow: hidden; }
+body {
+  display: flex; align-items: center; justify-content: center;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  color: #ece9e2;
+}
+#stage { position: relative; width: 960px; height: 540px; }
+#stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+#ui { position: absolute; inset: 0; pointer-events: none; }
+#ui > * { pointer-events: auto; }
+.hidden { display: none !important; }
+
+.title, .pause {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.2em;
+  background: rgba(10, 10, 12, 0.94);
+}
+.pause { background: rgba(10, 10, 12, 0.8); }
+.t-name { font-size: 2.2em; letter-spacing: 0.5em; color: #ece9e2; font-weight: 300; }
+.t-name.small { font-size: 1.4em; }
+.t-keys { display: flex; flex-direction: column; gap: 0.5em; font-size: 0.72em; color: #8a877f; text-align: center; }
+.t-keys b { color: #ece9e2; font-weight: 500; }
+.t-go { font-size: 0.8em; color: #ffb347; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: 0.4; } }
+
+/* Tuning panel: plain, readable, never in the way of the ceiling. */
+.panel {
+  position: absolute; top: 0; right: 0; bottom: 0; width: 360px;
+  overflow-y: auto; padding: 10px 12px;
+  background: rgba(8, 8, 10, 0.94); border-left: 1px solid #222;
+  font-size: 11px; color: #c9c6be;
+}
+.p-head { color: #ffb347; margin-bottom: 8px; }
+.p-row { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; }
+.panel button {
+  font: inherit; color: #ece9e2; background: #1b1b20; border: 1px solid #333; padding: 3px 7px; cursor: pointer;
+}
+.panel button:hover { border-color: #ffb347; }
+.p-log { border: 1px solid #222; padding: 6px; margin: 6px 0; max-height: 210px; overflow-y: auto; line-height: 1.45; }
+.p-log .p-sub { color: #ffb347; margin-bottom: 4px; }
+.p-stat { color: #8a877f; margin-bottom: 8px; }
+.p-group { color: #ffb347; margin: 10px 0 4px; }
+.p-param { display: grid; grid-template-columns: 1fr 110px 44px; gap: 6px; align-items: center; margin: 2px 0; }
+.p-param input { width: 110px; }
+.p-val { text-align: right; color: #ece9e2; }
